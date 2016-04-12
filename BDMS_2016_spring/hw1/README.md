@@ -1,5 +1,5 @@
 
-    本文件夹存放了 Homework_1 的相关内容
+    本文件夹存放了 Homework_1 的相关内容，需要安装 Hadoop & HBase，详见安装与配置.txt
 
     content.txt 存放了本文件夹的 tree 及 说明
 
