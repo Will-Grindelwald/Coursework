@@ -1,0 +1,94 @@
+     $join_cmd[0]= "R=/hw1/join_0R.tbl S=/hw1/join_0S.tbl join:R0=S0 res:R1,S1";
+     $join_cmd[1]= "R=/hw1/join_1R.tbl S=/hw1/join_1S.tbl join:R0=S0 res:R1,S1";
+     $join_cmd[2]= "R=/hw1/join_2R.tbl S=/hw1/join_2S.tbl join:R0=S0 res:R1,S1";
+     $join_cmd[3]= "R=/hw1/join_3R.tbl S=/hw1/join_3S.tbl join:R0=S0 res:R1,S1";
+     $join_cmd[4]= "R=/hw1/join_4R.tbl S=/hw1/join_4S.tbl join:R0=S2 res:R1,S1";
+     $join_cmd[5]= "R=/hw1/join_5R.tbl S=/hw1/join_5S.tbl join:R0=S3 res:R1,S1";
+     $join_cmd[6]= "R=/hw1/join_6R.tbl S=/hw1/join_6S.tbl join:R0=S4 res:R1,S1";
+     $join_cmd[7]= "R=/hw1/join_7R.tbl S=/hw1/join_7S.tbl join:R0=S5 res:R1,S1";
+     $join_cmd[8]= "R=/hw1/join_8R.tbl S=/hw1/join_8S.tbl join:R2=S3 res:R1,S1";
+
+     $join_col[0]= "rowkey res:R1 res:S1";
+     $join_col[1]= "rowkey res:R1 res:S1";
+     $join_col[2]= "rowkey res:R1 res:S1";
+     $join_col[3]= "rowkey res:R1 res:S1";
+     $join_col[4]= "rowkey res:R1 res:S1";
+     $join_col[5]= "rowkey res:R1 res:S1";
+     $join_col[6]= "rowkey res:R1 res:S1";
+     $join_col[7]= "rowkey res:R1 res:S1";
+     $join_col[8]= "rowkey res:R1 res:S1";
+     
+     $join_res[0]= "join_0res.tbl";
+     $join_res[1]= "join_1res.tbl";
+     $join_res[2]= "join_2res.tbl";
+     $join_res[3]= "join_3res.tbl";
+     $join_res[4]= "join_4res.tbl";
+     $join_res[5]= "join_5res.tbl";
+     $join_res[6]= "join_6res.tbl";
+     $join_res[7]= "join_7res.tbl";
+     $join_res[8]= "join_8res.tbl";
+
+my @groupby_cmd, @groupby_col, @groupby_res;
+
+     $groupby_cmd[0]= "R=/hw1/groupby_0.tbl groupby:R0 'res:count'";
+     $groupby_cmd[1]= "R=/hw1/groupby_1.tbl groupby:R1 'res:max(R0),count'";
+     $groupby_cmd[2]= "R=/hw1/groupby_2.tbl groupby:R2 'res:max(R0),max(R1),count'";
+     $groupby_cmd[3]= "R=/hw1/groupby_3.tbl groupby:R3 'res:max(R0),max(R2)'";
+     $groupby_cmd[4]= "R=/hw1/groupby_4.tbl groupby:R0 'res:count'";
+     $groupby_cmd[5]= "R=/hw1/groupby_5.tbl groupby:R1 'res:max(R0),count'";
+     $groupby_cmd[6]= "R=/hw1/groupby_6.tbl groupby:R2 'res:max(R0),max(R1),count'";
+     $groupby_cmd[7]= "R=/hw1/groupby_7.tbl groupby:R3 'res:max(R0),max(R2)'";
+     $groupby_cmd[8]= "R=/hw1/groupby_8.tbl groupby:R4 'res:count,max(R0),max(R3)'";
+
+     $groupby_col[0]= "rowkey res:count";
+     $groupby_col[1]= "rowkey 'res:max(R0)' res:count";
+     $groupby_col[2]= "rowkey 'res:max(R0)' 'res:max(R1)' res:count";
+     $groupby_col[3]= "rowkey 'res:max(R0)' 'res:max(R2)'";
+     $groupby_col[4]= "rowkey res:count";
+     $groupby_col[5]= "rowkey 'res:max(R0)' res:count";
+     $groupby_col[6]= "rowkey 'res:max(R0)' 'res:max(R1)' res:count";
+     $groupby_col[7]= "rowkey 'res:max(R0)' 'res:max(R2)'";
+     $groupby_col[8]= "rowkey res:count 'res:max(R0)' 'res:max(R3)'";
+
+     $groupby_res[0]= "groupby_0res.tbl";
+     $groupby_res[1]= "groupby_1res.tbl";
+     $groupby_res[2]= "groupby_2res.tbl";
+     $groupby_res[3]= "groupby_3res.tbl";
+     $groupby_res[4]= "groupby_4res.tbl";
+     $groupby_res[5]= "groupby_5res.tbl";
+     $groupby_res[6]= "groupby_6res.tbl";
+     $groupby_res[7]= "groupby_7res.tbl";
+     $groupby_res[8]= "groupby_8res.tbl";
+
+my @distinct_cmd, @distinct_col, @distinct_res;
+
+     $distinct_cmd[0]= "R=/hw1/distinct_0.tbl select:R0,gt,5 distinct:R1";
+     $distinct_cmd[1]= "R=/hw1/distinct_1.tbl select:R1,ge,25 distinct:R2,R0";
+     $distinct_cmd[2]= "R=/hw1/distinct_2.tbl select:R2,lt,167 distinct:R3,R3";
+     $distinct_cmd[3]= "R=/hw1/distinct_3.tbl select:R3,le,1250 distinct:R4,R3";
+     $distinct_cmd[4]= "R=/hw1/distinct_4.tbl select:R0,gt,5 distinct:R2";
+     $distinct_cmd[5]= "R=/hw1/distinct_5.tbl select:R1,ge,25 distinct:R3,R0";
+     $distinct_cmd[6]= "R=/hw1/distinct_6.tbl select:R2,lt,167 distinct:R4,R4";
+     $distinct_cmd[7]= "R=/hw1/distinct_7.tbl select:R3,le,1250 distinct:R5,R4";
+     $distinct_cmd[8]= "R=/hw1/distinct_8.tbl select:R4,gt,1000 distinct:R5,R4,R3";
+
+     $distinct_col[0]= "res:R1";
+     $distinct_col[1]= "res:R2 res:R0";
+     $distinct_col[2]= "res:R3 res:R3";
+     $distinct_col[3]= "res:R4 res:R3";
+     $distinct_col[4]= "res:R2";
+     $distinct_col[5]= "res:R3 res:R0";
+     $distinct_col[6]= "res:R4 res:R4";
+     $distinct_col[7]= "res:R5 res:R4";
+     $distinct_col[8]= "res:R5 res:R4 res:R3";
+
+     $distinct_res[0]= "distinct_0res.tbl";
+     $distinct_res[1]= "distinct_1res.tbl";
+     $distinct_res[2]= "distinct_2res.tbl";
+     $distinct_res[3]= "distinct_3res.tbl";
+     $distinct_res[4]= "distinct_4res.tbl";
+     $distinct_res[5]= "distinct_5res.tbl";
+     $distinct_res[6]= "distinct_6res.tbl";
+     $distinct_res[7]= "distinct_7res.tbl";
+     $distinct_res[8]= "distinct_8res.tbl";
+

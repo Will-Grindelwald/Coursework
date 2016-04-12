@@ -1,0 +1,321 @@
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] <localsrc> ... <dst>]
+	[-copyToLocal [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] <path> ...]
+	[-cp [-f] [-p | -p[topax]] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] <path> ...]
+	[-expunge]
+	[-get [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] <src> <localdst>]
+	[-help [cmd ...]]
+	[-ls [-d] [-h] [-R] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] <file>]
+	[-test -[defsz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touchz <path> ...]
+	[-usage [cmd ...]]
+
+-appendToFile <localsrc> ... <dst> :
+  Appends the contents of all the given local files to the given dst file. The dst
+  file will be created if it does not exist. If <localSrc> is -, then the input is
+  read from stdin.
+
+-cat [-ignoreCrc] <src> ... :
+  Fetch all files that match the file pattern <src> and display their content on
+  stdout.
+
+-checksum <src> ... :
+  Dump checksum information for files that match the file pattern <src> to stdout.
+  Note that this requires a round-trip to a datanode storing each block of the
+  file, and thus is not efficient to run on a large number of files. The checksum
+  of a file depends on its content, block size and the checksum algorithm and
+  parameters used for creating the file.
+
+-chgrp [-R] GROUP PATH... :
+  This is equivalent to -chown ... :GROUP ...
+
+-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH... :
+  Changes permissions of a file. This works similar to the shell's chmod command
+  with a few exceptions.
+                                                                                 
+  -R           modifies the files recursively. This is the only option currently 
+               supported.                                                        
+  <MODE>       Mode is the same as mode used for the shell's command. The only   
+               letters recognized are 'rwxXt', e.g. +t,a+r,g-w,+rwx,o=r.         
+  <OCTALMODE>  Mode specifed in 3 or 4 digits. If 4 digits, the first may be 1 or
+               0 to turn the sticky bit on or off, respectively.  Unlike the     
+               shell command, it is not possible to specify only part of the     
+               mode, e.g. 754 is same as u=rwx,g=rx,o=r.                         
+  
+  If none of 'augo' is specified, 'a' is assumed and unlike the shell command, no
+  umask is applied.
+
+-chown [-R] [OWNER][:[GROUP]] PATH... :
+  Changes owner and group of a file. This is similar to the shell's chown command
+  with a few exceptions.
+                                                                                 
+  -R  modifies the files recursively. This is the only option currently          
+      supported.                                                                 
+  
+  If only the owner or group is specified, then only the owner or group is
+  modified. The owner and group names may only consist of digits, alphabet, and
+  any of [-_./@a-zA-Z0-9]. The names are case sensitive.
+  
+  WARNING: Avoid using '.' to separate user name and group though Linux allows it.
+  If user names have dots in them and you are using local file system, you might
+  see surprising results since the shell command 'chown' is used for local files.
+
+-copyFromLocal [-f] [-p] [-l] <localsrc> ... <dst> :
+  Identical to the -put command.
+
+-copyToLocal [-p] [-ignoreCrc] [-crc] <src> ... <localdst> :
+  Identical to the -get command.
+
+-count [-q] [-h] <path> ... :
+  Count the number of directories, files and bytes under the paths
+  that match the specified file pattern.  The output columns are:
+  DIR_COUNT FILE_COUNT CONTENT_SIZE FILE_NAME or
+  QUOTA REMAINING_QUOTA SPACE_QUOTA REMAINING_SPACE_QUOTA 
+        DIR_COUNT FILE_COUNT CONTENT_SIZE FILE_NAME
+  The -h option shows file sizes in human readable format.
+
+-cp [-f] [-p | -p[topax]] <src> ... <dst> :
+  Copy files that match the file pattern <src> to a destination.  When copying
+  multiple files, the destination must be a directory. Passing -p preserves status
+  [topax] (timestamps, ownership, permission, ACLs, XAttr). If -p is specified
+  with no <arg>, then preserves timestamps, ownership, permission. If -pa is
+  specified, then preserves permission also because ACL is a super-set of
+  permission. Passing -f overwrites the destination if it already exists. raw
+  namespace extended attributes are preserved if (1) they are supported (HDFS
+  only) and, (2) all of the source and target pathnames are in the /.reserved/raw
+  hierarchy. raw namespace xattr preservation is determined solely by the presence
+  (or absence) of the /.reserved/raw prefix and not by the -p option.
+
+-createSnapshot <snapshotDir> [<snapshotName>] :
+  Create a snapshot on a directory
+
+-deleteSnapshot <snapshotDir> <snapshotName> :
+  Delete a snapshot from a directory
+
+-df [-h] [<path> ...] :
+  Shows the capacity, free and used space of the filesystem. If the filesystem has
+  multiple partitions, and no path to a particular partition is specified, then
+  the status of the root partitions will be shown.
+                                                                                 
+  -h  Formats the sizes of files in a human-readable fashion rather than a number
+      of bytes.                                                                  
+
+-du [-s] [-h] <path> ... :
+  Show the amount of space, in bytes, used by the files that match the specified
+  file pattern. The following flags are optional:
+                                                                                 
+  -s  Rather than showing the size of each individual file that matches the      
+      pattern, shows the total (summary) size.                                   
+  -h  Formats the sizes of files in a human-readable fashion rather than a number
+      of bytes.                                                                  
+  
+  Note that, even without the -s option, this only shows size summaries one level
+  deep into a directory.
+  
+  The output is in the form 
+  	size	name(full path)
+
+-expunge :
+  Empty the Trash
+
+-get [-p] [-ignoreCrc] [-crc] <src> ... <localdst> :
+  Copy files that match the file pattern <src> to the local name.  <src> is kept. 
+  When copying multiple files, the destination must be a directory. Passing -p
+  preserves access and modification times, ownership and the mode.
+
+-getfacl [-R] <path> :
+  Displays the Access Control Lists (ACLs) of files and directories. If a
+  directory has a default ACL, then getfacl also displays the default ACL.
+                                                                  
+  -R      List the ACLs of all files and directories recursively. 
+  <path>  File or directory to list.                              
+
+-getfattr [-R] {-n name | -d} [-e en] <path> :
+  Displays the extended attribute names and values (if any) for a file or
+  directory.
+                                                                                 
+  -R             Recursively list the attributes for all files and directories.  
+  -n name        Dump the named extended attribute value.                        
+  -d             Dump all extended attribute values associated with pathname.    
+  -e <encoding>  Encode values after retrieving them.Valid encodings are "text", 
+                 "hex", and "base64". Values encoded as text strings are enclosed
+                 in double quotes ("), and values encoded as hexadecimal and     
+                 base64 are prefixed with 0x and 0s, respectively.               
+  <path>         The file or directory.                                          
+
+-getmerge [-nl] <src> <localdst> :
+  Get all the files in the directories that match the source file pattern and
+  merge and sort them to only one file on local fs. <src> is kept.
+                                                        
+  -nl  Add a newline character at the end of each file. 
+
+-help [cmd ...] :
+  Displays help for given command or all commands if none is specified.
+
+-ls [-d] [-h] [-R] [<path> ...] :
+  List the contents that match the specified file pattern. If path is not
+  specified, the contents of /user/<currentUser> will be listed. Directory entries
+  are of the form:
+  	permissions - userId groupId sizeOfDirectory(in bytes)
+  modificationDate(yyyy-MM-dd HH:mm) directoryName
+  
+  and file entries are of the form:
+  	permissions numberOfReplicas userId groupId sizeOfFile(in bytes)
+  modificationDate(yyyy-MM-dd HH:mm) fileName
+                                                                                 
+  -d  Directories are listed as plain files.                                     
+  -h  Formats the sizes of files in a human-readable fashion rather than a number
+      of bytes.                                                                  
+  -R  Recursively list the contents of directories.                              
+
+-mkdir [-p] <path> ... :
+  Create a directory in specified location.
+                                                  
+  -p  Do not fail if the directory already exists 
+
+-moveFromLocal <localsrc> ... <dst> :
+  Same as -put, except that the source is deleted after it's copied.
+
+-moveToLocal <src> <localdst> :
+  Not implemented yet
+
+-mv <src> ... <dst> :
+  Move files that match the specified file pattern <src> to a destination <dst>. 
+  When moving multiple files, the destination must be a directory.
+
+-put [-f] [-p] [-l] <localsrc> ... <dst> :
+  Copy files from the local file system into fs. Copying fails if the file already
+  exists, unless the -f flag is given.
+  Flags:
+                                                                       
+  -p  Preserves access and modification times, ownership and the mode. 
+  -f  Overwrites the destination if it already exists.                 
+  -l  Allow DataNode to lazily persist the file to disk. Forces        
+         replication factor of 1. This flag will result in reduced
+         durability. Use with care.
+
+-renameSnapshot <snapshotDir> <oldName> <newName> :
+  Rename a snapshot from oldName to newName
+
+-rm [-f] [-r|-R] [-skipTrash] <src> ... :
+  Delete all files that match the specified file pattern. Equivalent to the Unix
+  command "rm <src>"
+                                                                                 
+  -skipTrash  option bypasses trash, if enabled, and immediately deletes <src>   
+  -f          If the file does not exist, do not display a diagnostic message or 
+              modify the exit status to reflect an error.                        
+  -[rR]       Recursively deletes directories                                    
+
+-rmdir [--ignore-fail-on-non-empty] <dir> ... :
+  Removes the directory entry specified by each directory argument, provided it is
+  empty.
+
+-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>] :
+  Sets Access Control Lists (ACLs) of files and directories.
+  Options:
+                                                                                 
+  -b          Remove all but the base ACL entries. The entries for user, group   
+              and others are retained for compatibility with permission bits.    
+  -k          Remove the default ACL.                                            
+  -R          Apply operations to all files and directories recursively.         
+  -m          Modify ACL. New entries are added to the ACL, and existing entries 
+              are retained.                                                      
+  -x          Remove specified ACL entries. Other ACL entries are retained.      
+  --set       Fully replace the ACL, discarding all existing entries. The        
+              <acl_spec> must include entries for user, group, and others for    
+              compatibility with permission bits.                                
+  <acl_spec>  Comma separated list of ACL entries.                               
+  <path>      File or directory to modify.                                       
+
+-setfattr {-n name [-v value] | -x name} <path> :
+  Sets an extended attribute name and value for a file or directory.
+                                                                                 
+  -n name   The extended attribute name.                                         
+  -v value  The extended attribute value. There are three different encoding     
+            methods for the value. If the argument is enclosed in double quotes, 
+            then the value is the string inside the quotes. If the argument is   
+            prefixed with 0x or 0X, then it is taken as a hexadecimal number. If 
+            the argument begins with 0s or 0S, then it is taken as a base64      
+            encoding.                                                            
+  -x name   Remove the extended attribute.                                       
+  <path>    The file or directory.                                               
+
+-setrep [-R] [-w] <rep> <path> ... :
+  Set the replication level of a file. If <path> is a directory then the command
+  recursively changes the replication factor of all files under the directory tree
+  rooted at <path>.
+                                                                                 
+  -w  It requests that the command waits for the replication to complete. This   
+      can potentially take a very long time.                                     
+  -R  It is accepted for backwards compatibility. It has no effect.              
+
+-stat [format] <path> ... :
+  Print statistics about the file/directory at <path> in the specified format.
+  Format accepts filesize in blocks (%b), group name of owner(%g), filename (%n),
+  block size (%o), replication (%r), user name of owner(%u), modification date
+  (%y, %Y)
+
+-tail [-f] <file> :
+  Show the last 1KB of the file.
+                                             
+  -f  Shows appended data as the file grows. 
+
+-test -[defsz] <path> :
+  Answer various questions about <path>, with result via exit status.
+    -d  return 0 if <path> is a directory.
+    -e  return 0 if <path> exists.
+    -f  return 0 if <path> is a file.
+    -s  return 0 if file <path> is greater than zero bytes in size.
+    -z  return 0 if file <path> is zero bytes in size, else return 1.
+
+-text [-ignoreCrc] <src> ... :
+  Takes a source file and outputs the file in text format.
+  The allowed formats are zip and TextRecordInputStream and Avro.
+
+-touchz <path> ... :
+  Creates a file of zero length at <path> with current time as the timestamp of
+  that <path>. An error is returned if the file exists with non-zero length
+
+-usage [cmd ...] :
+  Displays the usage for given command or all commands if none is specified.
+
+Generic options supported are
+-conf <configuration file>     specify an application configuration file
+-D <property=value>            use value for given property
+-fs <local|namenode:port>      specify a namenode
+-jt <local|resourcemanager:port>    specify a ResourceManager
+-files <comma separated list of files>    specify comma separated files to be copied to the map reduce cluster
+-libjars <comma separated list of jars>    specify comma separated jar files to include in the classpath.
+-archives <comma separated list of archives>    specify comma separated archives to be unarchived on the compute machines.
+
+The general command line syntax is
+bin/hadoop command [genericOptions] [commandOptions]
+
