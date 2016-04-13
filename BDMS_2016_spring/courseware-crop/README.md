@@ -1,3 +1,4 @@
+#courseware-crop
 
     这个小项目是在我对Python语法尚不清楚的情况下做出来的。
 
