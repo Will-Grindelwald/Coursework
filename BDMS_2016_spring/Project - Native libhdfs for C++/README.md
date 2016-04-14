@@ -1,3 +1,2 @@
-#Project - Native libhdfs for C++
+# Project - Native libhdfs for C++
 
-    

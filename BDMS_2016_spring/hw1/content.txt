@@ -8,7 +8,7 @@
 ├── 2                                 // 2组 - 我写的
 │   ├── 2_201528013359030_hw1.java
 │   └── Hw1Grp2.java
-├── 3                                 // 3组 - 我写的
+├── 3                                 // 3组 - 我写的 & this is my group, so it's the most perfect.
 │   ├── 3_201528013329007_hw1.java
 │   └── Hw1Grp3.java
 ├── 5                                 // 5组 - 未知者写的
