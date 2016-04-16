@@ -2,7 +2,7 @@
 ├── 0                                 // 0组 - 我写的
 │   ├── 0_201528013329010_hw1.java
 │   └── Hw1Grp0.java
-├── 1                                 // 1组 - 魏陆奇写的
+├── 1                                 // 1组 - 567写的
 │   ├── 1_201528013329011_hw1.java
 │   └── Hw1Grp1.java
 ├── 2                                 // 2组 - 我写的
@@ -41,4 +41,3 @@
     ├── HBaseTest.java                    // 向 HBase 存数据的示例程序
     ├── HDFSTest.java                     // 从 Hadoop 取数据的示例程序
     └── Hw1GrpX.java                      // Nested Loop Join 的示例程序
-
