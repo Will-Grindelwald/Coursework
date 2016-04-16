@@ -1,20 +1,20 @@
 .
 ├── 0                                 // 0组 - 我写的
-│   ├── 0_201528013329010_hw1.java
-│   └── Hw1Grp0.java
+│   ├── Hw1Grp0.java
+│   └── readme
 ├── 1                                 // 1组 - 567写的
-│   ├── 1_201528013329011_hw1.java
-│   └── Hw1Grp1.java
+│   ├── Hw1Grp1.java
+│   └── readme
 ├── 2                                 // 2组 - 我写的
-│   ├── 2_201528013359030_hw1.java
-│   └── Hw1Grp2.java
+│   ├── Hw1Grp2.java
+│   └── readme
 ├── 3                                 // 3组 - 我写的 & this is my group, so it's the most perfect.
-│   ├── 3_201528013329007_hw1.java
-│   └── Hw1Grp3.java
+│   ├── Hw1Grp3.java
+│   └── readme
 ├── 5                                 // 5组 - 未知者写的
-│   ├── 5_201528013329015_hw1.java
-│   └── Hw1Grp5.java
-├── hw1-check                         // 老师写的作业评分程序，貌似是上一级的
+│   ├── Hw1Grp5.java
+│   └── readme
+├── hw1-check                         // 老师写的作业评分程序，貌似是上一年级的
 │   ├── bld
 │   │   └── HBase2TableAll.class
 │   ├── input                             // 测试程序输入文件的文件夹
