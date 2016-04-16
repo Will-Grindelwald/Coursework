@@ -8,7 +8,7 @@
 从HDFS读文件, 做中间处理, 输出到HBase  
 中间处理: 
 
-0. Hash join
+1. Hash join
 * Sort‐merge join
 * Hash based group‐by
 * Sort based group‐by
