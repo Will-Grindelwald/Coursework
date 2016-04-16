@@ -9,4 +9,5 @@
 需要额外提出的是:
 
 1. `content.txt`存放了本文件夹的 tree 及 说明
+* `homework_2.pdf`是本次作业的详细说明
 * 一切工作开始前先`./start.sh`，结束后`./stop.sh`
