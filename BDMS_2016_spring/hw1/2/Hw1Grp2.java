@@ -24,12 +24,12 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
 
-class Value {
-    int count;
-    ArrayList<Double> result = new ArrayList<Double>();
-}
-
 public class Hw1Grp2 {
+
+    private static class Value {
+        int count;
+        ArrayList<Double> result = new ArrayList<Double>();
+    }
 
     public static void main(String[] args) throws IOException, URISyntaxException, MasterNotRunningException, ZooKeeperConnectionException {
 
@@ -120,7 +120,7 @@ public class Hw1Grp2 {
                 switch(op[0]){
                 case 1: put.add(columnFamily.getBytes(), columnKey[i].getBytes(), (entry.getValue().count + "").getBytes());
                         break;
-                case 2: put.add(columnFamily.getBytes(), columnKey[i].getBytes(), (((int)(entry.getValue().result.get(i) / entry.getValue().count * 100)) / 100.0 + "").getBytes()); break;
+                case 2: put.add(columnFamily.getBytes(), columnKey[i].getBytes(), (((int)(entry.getValue().result.get(i) / entry.getValue().count * 100 + 0.5)) / 100.0 + "").getBytes()); break;
                 case 3: put.add(columnFamily.getBytes(), columnKey[i].getBytes(), (entry.getValue().result.get(i) + "").getBytes());
                 }
             }
@@ -130,4 +130,3 @@ public class Hw1Grp2 {
         System.out.println("put successfully");
     }
 }
-

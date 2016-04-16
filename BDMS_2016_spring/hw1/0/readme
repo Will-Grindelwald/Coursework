@@ -1,0 +1,5 @@
+#测试时，
+cp Hw1Grp0.java 0_201528013329010_hw1.java
+cd ../hw1-check
+./run-test.pl score.out ../0/0_201528013329010_hw1.java 2>&1 | tee run.out
+cat score.out

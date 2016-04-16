@@ -141,4 +141,3 @@ public class Hw1Grp5 {
         return x < limit;
     }
 }
-

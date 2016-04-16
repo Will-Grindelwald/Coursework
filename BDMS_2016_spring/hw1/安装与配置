@@ -1,3 +1,4 @@
+
 1. 安装jdk
 配置：在/etc/profile添加
 export JAVA_HOME=/usr/local/java/jdk1.8.0_77  *********要改哦

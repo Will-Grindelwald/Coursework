@@ -154,11 +154,10 @@ public class Hw1Grp3 {
             op = operations.get(i);
             switch(op[0]){
             case 1: put.add(columnFamily.getBytes(), columnKey[i].getBytes(), (count + "").getBytes()); break;
-            case 2: result[i] = ((int)(result[i] / count * 100)) / 100.0;
+            case 2: result[i] = ((int)(result[i] / count * 100 + 0.5)) / 100.0;
             case 3: put.add(columnFamily.getBytes(), columnKey[i].getBytes(), (result[i] + "").getBytes());
             }
         }
         table.put(put);
     }
 }
-
