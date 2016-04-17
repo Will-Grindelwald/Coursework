@@ -23,8 +23,8 @@ export PATH=$PATH:${HOME}/bin:${JAVA_HOME}/bin
 
 export JAVA_HOME=/usr/local/java/jdk1.8.0_77
 
-HADOOP_HOME=/usr/local/hadoop-2.6.0
-HBASE_HOME=/usr/local/hbase-0.98.11-hadoop2
+export HADOOP_HOME=/usr/local/hadoop-2.6.0
+export HBASE_HOME=/usr/local/hbase-0.98.11-hadoop2
 
 export CLASSPATH=${CLASSPATH}:${HADOOP_HOME}/etc/hadoop:${HADOOP_HOME}/share/hadoop/common/lib/*:${HADOOP_HOME}/share/hadoop/common/*:${HADOOP_HOME}/share/hadoop/hdfs:${HADOOP_HOME}/share/hadoop/hdfs/lib/*:${HADOOP_HOME}/share/hadoop/hdfs/*:${HADOOP_HOME}/share/hadoop/yarn/lib/*:${HADOOP_HOME}/share/hadoop/yarn/*:${HADOOP_HOME}/share/hadoop/mapreduce/lib/*:${HADOOP_HOME}/share/hadoop/mapreduce/*:/contrib/capacity-scheduler/*.jar:${HBASE_HOME}/lib/*
 
