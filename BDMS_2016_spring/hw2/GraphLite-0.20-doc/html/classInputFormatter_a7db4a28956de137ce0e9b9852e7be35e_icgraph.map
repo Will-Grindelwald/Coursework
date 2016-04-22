@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classInputFormatter.html#aa01280a5ac73bed7a99fdef9a2f73602" title="InputFormatter::open" alt="" coords="279,5,420,35"/>
+<area shape="rect" id="node5" href="$classWorker.html#a5c81dd67f80e340045b5be04e0ed7ca4" title="Worker::readInput" alt="" coords="471,5,596,35"/>
+<area shape="rect" id="node7" href="$classWorker.html#a5c9ece8fd8c6723b9dad465aed82425d" title="Worker::run" alt="" coords="645,5,736,35"/>
+<area shape="rect" id="node9" href="$main_8cc.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="784,5,835,35"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classOutputFormatter.html#a3e156e03c72730f99c53e268b116bb81" title="OutputFormatter::open" alt="" coords="212,5,364,35"/>
+<area shape="rect" id="node5" href="$classWorker_1_1ResultIterator.html#adfa6c957b61c95d5741da69ee7824ae6" title="Worker::ResultIterator::init" alt="" coords="200,59,376,88"/>
+<area shape="rect" id="node7" href="$classOutputFormatter.html#a6af0f0b40a00e8e35de0145ab65fad30" title="OutputFormatter::writeResult" alt="" coords="193,112,383,141"/>
+<area shape="rect" id="node9" href="$classOutputFormatter.html#a0276d18e00c313a1f0cedf39825dff48" title="OutputFormatter::close" alt="" coords="211,165,365,195"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classReceiver.html" title="Receiver" alt="" coords="5,200,80,229"/>
+<area shape="rect" id="node4" href="$classMsgBuffer.html" title="MsgBuffer" alt="" coords="55,101,137,131"/>
+<area shape="rect" id="node6" href="$classSender.html" title="Sender" alt="" coords="120,200,181,229"/>
+<area shape="rect" id="node9" href="$classAggregatorBase.html" title="AggregatorBase" alt="" coords="203,101,317,131"/>
+<area shape="rect" id="node11" href="$classGraph.html" title="Graph" alt="" coords="449,200,505,229"/>
+<area shape="rect" id="node13" href="$classInputFormatter.html" title="InputFormatter" alt="" coords="357,101,464,131"/>
+<area shape="rect" id="node16" href="$classVertexBase.html" title="VertexBase" alt="" coords="488,101,579,131"/>
+<area shape="rect" id="node18" href="$classNode.html" title="Node" alt="" coords="507,5,560,35"/>
+<area shape="rect" id="node20" href="$classOutputFormatter.html" title="OutputFormatter" alt="" coords="603,101,720,131"/>
+<area shape="rect" id="node22" href="$structAddr.html" title="Addr" alt="" coords="821,101,869,131"/>
+</map>

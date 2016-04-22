@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classVertexBase.html#accbe806fe160b0e726f7255d6232e274" title="VertexBase::getVSize" alt="" coords="153,5,303,35"/>
+<area shape="rect" id="node5" href="$classVertexBase.html#a18435bd7b19d139c5074a69687e4ee5d" title="VertexBase::getESize" alt="" coords="153,59,303,88"/>
+<area shape="rect" id="node7" href="$classVertexBase.html#ac57d42333882479ce7a74f12695e43aa" title="VertexBase::getMSize" alt="" coords="152,112,304,141"/>
+<area shape="rect" id="node9" href="$classFreeList.html#ac8d526f46ecd68010f1b9ec26d05dffb" title="FreeList::setEle" alt="" coords="171,165,285,195"/>
+<area shape="rect" id="node11" href="$classAggregatorBase.html#a366db61dffcb049c6a25b35f4e8b83b0" title="AggregatorBase::init" alt="" coords="159,219,297,248"/>
+<area shape="rect" id="node13" href="$classAggregatorBase.html#ad5d92769cdd8a704f64414daa106d94b" title="AggregatorBase::getSize" alt="" coords="145,272,311,301"/>
+<area shape="rect" id="node15" href="$classReceiver.html#a572c838f9f28e55729398bf002112903" title="Receiver::init" alt="" coords="179,325,277,355"/>
+<area shape="rect" id="node17" href="$classSender.html#a4b1c2fafdb59afbbba56d2ff7fd8060f" title="Sender::init" alt="" coords="184,379,272,408"/>
+<area shape="rect" id="node19" href="$Worker_8cc.html#ad4722b61293aacdb40ccecf751f94968" title="w_receiveFun" alt="" coords="177,432,279,461"/>
+<area shape="rect" id="node31" href="$Worker_8cc.html#a52106eadbcfcd729da11c959dc573a93" title="w_sendFun" alt="" coords="184,645,272,675"/>
+<area shape="rect" id="node21" href="$classReceiver.html#a057ce8b4294f7bff1a31eb0936ca2ce3" title="Receiver::bindServerAddr" alt="" coords="360,299,531,328"/>
+<area shape="rect" id="node23" href="$classReceiver.html#a520bcf1ece27f438b0e6cbe6f0eee1b5" title="Receiver::listenClient" alt="" coords="372,352,519,381"/>
+<area shape="rect" id="node25" href="$classReceiver.html#a7e639137015c6886da2973fdb41dd5db" title="Receiver::acceptClient" alt="" coords="368,405,523,435"/>
+<area shape="rect" id="node27" href="$classReceiver.html#aeb19b4635a2c83d52797816983a75afd" title="Receiver::recvMsg" alt="" coords="380,459,511,488"/>
+<area shape="rect" id="node29" href="$classReceiver.html#ada836e972de81cc96497a682b579e4dd" title="Receiver::closeAllSocket" alt="" coords="361,512,529,541"/>
+<area shape="rect" id="node33" href="$classSender.html#a5d1d67365988a5280a1b74ba328c96f8" title="Sender::getSocketFd" alt="" coords="373,565,517,595"/>
+<area shape="rect" id="node35" href="$classSender.html#a4f85b6c0ae25757640babd68859b8db7" title="Sender::getServerAddr" alt="" coords="368,619,523,648"/>
+<area shape="rect" id="node37" href="$classSender.html#a4877f6ed8da8ae61d1cc0f89d14395ab" title="Sender::connectServer" alt="" coords="368,672,523,701"/>
+<area shape="rect" id="node39" href="$classSender.html#aa1a3ad39524ee77e654d192c6e82de62" title="Sender::sendMsg" alt="" coords="384,725,507,755"/>
+<area shape="rect" id="node41" href="$classSender.html#a28f2418e5712a9f6fa70b82ac6ca417c" title="Sender::closeAllSocket" alt="" coords="367,779,524,808"/>
+</map>

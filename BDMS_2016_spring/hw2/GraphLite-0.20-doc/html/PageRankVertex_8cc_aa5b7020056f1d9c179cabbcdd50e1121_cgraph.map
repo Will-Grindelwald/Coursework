@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classAggregator.html#a95a1b502bb1fd7edd8880a148a918b7e" title="Aggregator::init" alt="" coords="252,5,361,35"/>
+<area shape="rect" id="node5" href="$classAggregator.html#ad0b5b9deb16194ab8745bbb01d329920" title="Aggregator::getGlobal" alt="" coords="233,59,380,88"/>
+<area shape="rect" id="node7" href="$classAggregator.html#a0dd10d87e35e3f136c22711b820cf905" title="Aggregator::setGlobal" alt="" coords="233,112,380,141"/>
+<area shape="rect" id="node9" href="$classAggregator.html#ae1f58ffcd33e958359ae2766deb60227" title="Aggregator::getLocal" alt="" coords="236,165,377,195"/>
+<area shape="rect" id="node11" href="$classAggregator.html#a260f0c839001b7b67f56dd8b80f12aef" title="Aggregator::merge" alt="" coords="243,219,371,248"/>
+<area shape="rect" id="node13" href="$classAggregator.html#a97b735b4f4dc52c9f6ab275cf6fac3d0" title="Aggregator::accumulate" alt="" coords="227,272,387,301"/>
+</map>
