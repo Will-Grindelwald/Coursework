@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$InputFormatter_8cc.html" title="engine/InputFormatter.cc" alt="" coords="5,83,171,112"/>
-<area shape="rect" id="node5" href="$main_8cc.html" title="engine/main.cc" alt="" coords="195,83,304,112"/>
-<area shape="rect" id="node7" href="$Node_8cc.html" title="engine/Node.cc" alt="" coords="328,83,440,112"/>
-<area shape="rect" id="node9" href="$OutputFormatter_8cc.html" title="engine/OutputFormatter.cc" alt="" coords="464,83,640,112"/>
-<area shape="rect" id="node11" href="$Worker_8cc.html" title="engine/Worker.cc" alt="" coords="664,83,787,112"/>
-</map>

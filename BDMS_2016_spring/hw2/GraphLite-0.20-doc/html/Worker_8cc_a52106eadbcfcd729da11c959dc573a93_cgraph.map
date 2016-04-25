@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classSender.html#a5d1d67365988a5280a1b74ba328c96f8" title="Sender::getSocketFd" alt="" coords="152,5,296,35"/>
-<area shape="rect" id="node5" href="$classSender.html#a4f85b6c0ae25757640babd68859b8db7" title="Sender::getServerAddr" alt="" coords="147,59,301,88"/>
-<area shape="rect" id="node7" href="$classSender.html#a4877f6ed8da8ae61d1cc0f89d14395ab" title="Sender::connectServer" alt="" coords="147,112,301,141"/>
-<area shape="rect" id="node9" href="$classSender.html#aa1a3ad39524ee77e654d192c6e82de62" title="Sender::sendMsg" alt="" coords="163,165,285,195"/>
-<area shape="rect" id="node11" href="$classSender.html#a28f2418e5712a9f6fa70b82ac6ca417c" title="Sender::closeAllSocket" alt="" coords="145,219,303,248"/>
-</map>

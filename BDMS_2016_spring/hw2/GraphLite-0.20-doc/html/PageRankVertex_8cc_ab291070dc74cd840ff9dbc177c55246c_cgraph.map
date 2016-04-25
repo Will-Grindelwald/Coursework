@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classGraph.html#aec9380693c58f9fe3b6d8c7b7c1feda4" title="Graph::init" alt="" coords="259,5,341,35"/>
-<area shape="rect" id="node5" href="$classGraph.html#a2e77f4cec008516949b210ebf86f4e53" title="Graph::setNumHosts" alt="" coords="227,59,373,88"/>
-<area shape="rect" id="node7" href="$classGraph.html#a6acb5a483e47aabed9dde57c6a348f04" title="Graph::setHost" alt="" coords="245,112,355,141"/>
-<area shape="rect" id="node9" href="$classGraph.html#adcf5e472245974ce587607d3c4c4735f" title="Graph::regNumAggr" alt="" coords="231,165,369,195"/>
-<area shape="rect" id="node11" href="$classGraph.html#a94f087dcbf81f25132e2583a73a9d8df" title="Graph::regAggr" alt="" coords="245,219,355,248"/>
-<area shape="rect" id="node13" href="$classGraph.html#a48a66c8e0c6fc6eafa62b58e80bd34cc" title="Graph::term" alt="" coords="255,272,345,301"/>
-</map>

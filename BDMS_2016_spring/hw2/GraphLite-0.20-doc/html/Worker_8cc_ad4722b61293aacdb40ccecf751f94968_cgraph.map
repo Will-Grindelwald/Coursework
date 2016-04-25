@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classReceiver.html#a057ce8b4294f7bff1a31eb0936ca2ce3" title="Receiver::bindServerAddr" alt="" coords="157,5,328,35"/>
-<area shape="rect" id="node5" href="$classReceiver.html#a520bcf1ece27f438b0e6cbe6f0eee1b5" title="Receiver::listenClient" alt="" coords="169,59,316,88"/>
-<area shape="rect" id="node7" href="$classReceiver.html#a7e639137015c6886da2973fdb41dd5db" title="Receiver::acceptClient" alt="" coords="165,112,320,141"/>
-<area shape="rect" id="node9" href="$classReceiver.html#aeb19b4635a2c83d52797816983a75afd" title="Receiver::recvMsg" alt="" coords="177,165,308,195"/>
-<area shape="rect" id="node11" href="$classReceiver.html#ada836e972de81cc96497a682b579e4dd" title="Receiver::closeAllSocket" alt="" coords="159,219,327,248"/>
-</map>

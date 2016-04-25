@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classWorker.html#a08042757e6ed686ce15449b5cafaa87f" title="Worker::init" alt="" coords="196,5,284,35"/>
-<area shape="rect" id="node5" href="$classWorker.html#a5c9ece8fd8c6723b9dad465aed82425d" title="Worker::run" alt="" coords="557,5,648,35"/>
-<area shape="rect" id="node9" href="$classWorker.html#acb7204aca3f9fecbdbaf025895589b9d" title="Worker::performSuperstep" alt="" coords="335,31,508,60"/>
-<area shape="rect" id="node7" href="$main_8cc.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="696,5,747,35"/>
-</map>

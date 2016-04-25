@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$FreeList_8h.html" title="engine/FreeList.h" alt="" coords="273,83,396,112"/>
-<area shape="rect" id="node5" href="$Worker_8h.html" title="engine/Worker.h" alt="" coords="325,160,443,189"/>
-<area shape="rect" id="node7" href="$InputFormatter_8cc.html" title="engine/InputFormatter.cc" alt="" coords="5,237,171,267"/>
-<area shape="rect" id="node9" href="$main_8cc.html" title="engine/main.cc" alt="" coords="195,237,304,267"/>
-<area shape="rect" id="node11" href="$Node_8cc.html" title="engine/Node.cc" alt="" coords="328,237,440,267"/>
-<area shape="rect" id="node13" href="$OutputFormatter_8cc.html" title="engine/OutputFormatter.cc" alt="" coords="464,237,640,267"/>
-<area shape="rect" id="node15" href="$Worker_8cc.html" title="engine/Worker.cc" alt="" coords="664,237,787,267"/>
-</map>

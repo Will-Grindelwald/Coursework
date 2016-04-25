@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classMaster.html#aaa006e45a051cc3ecbe8bedb966a584c" title="Master::loadUserFile" alt="" coords="152,5,293,35"/>
-<area shape="rect" id="node9" href="$classWorker.html#a67f297655148f6bd84d3cb4a8ddcbc94" title="Worker::loadUserFile" alt="" coords="151,59,295,88"/>
-<area shape="rect" id="node14" href="$PageRankVertex_8cc.html#ab291070dc74cd840ff9dbc177c55246c" title="VERTEX_CLASS_NAME" alt="" coords="136,112,309,141"/>
-<area shape="rect" id="node5" href="$classMaster.html#a90566afc3cfc406fd372c3fede8c82b4" title="Master::run" alt="" coords="359,5,447,35"/>
-<area shape="rect" id="node7" href="$main_8cc.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="496,32,547,61"/>
-<area shape="rect" id="node11" href="$classWorker.html#a5c9ece8fd8c6723b9dad465aed82425d" title="Worker::run" alt="" coords="357,59,448,88"/>
-</map>
