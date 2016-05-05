@@ -1,0 +1,226 @@
+--------------------------------------------------------------------------------
+What is Aggregator 
+--------------------------------------------------------------------------------
+
+Aggregators are a mechanism for global communication in synchronized graph
+computation.  Aggregators are often used to implement sum, average, max, min,
+and other types of statistics.  An Aggregator can be updated by vertex
+compute() in parallel.  GraphLite guarantees the correctness.  That is, all the
+updates will be correctly reflected in the Aggregator's global state.
+
+The basic idea is for each worker to keep a local copy of an Aggregator.  The
+local copy is updated by the vertex compute() during a superstep.  At the end
+of a superstep, the workers send their local copies of the Aggregator to the
+master.  The master merges all the local copies and the previous global value
+to obtain the new global value for the Aggregator.  This new global value will
+be sent back to all the workers, which can be read by vertex compute().
+
+
+--------------------------------------------------------------------------------
+AggregatorBase
+--------------------------------------------------------------------------------
+Any Aggregator must be a sub-class of the Aggregator<T> class, which implements
+the AggregatorBase abstract class:
+
+class AggregatorBase {
+public:
+    /** Initialize, mainly for aggregator value. */
+    virtual void init() = 0;
+
+    /**
+     * Get aggregator value type size.
+     * @return aggregator value type size.
+     */
+    virtual int getSize() const = 0;
+
+    /**
+     * Get aggregator global value.
+     * @return pointer of aggregator global value
+     */
+    virtual void* getGlobal() = 0;
+
+    /**
+     * Set aggregator global value.
+     * @param p pointer of value to set global as
+     */
+    virtual void setGlobal(const void* p) = 0;
+
+    /**
+     * Get aggregator local value.
+     * @return pointer of aggregator local value
+     */
+    virtual void* getLocal() = 0;
+
+    /**
+     * Merge method for global.
+     * @param p pointer of value to be merged
+     */
+    virtual void merge(const void* p) = 0;
+
+    /**
+     * Accumulate method for local.
+     * @param p pointer of value to be accumulated
+     */
+    virtual void accumulate(const void* p) = 0;
+}; // definition of AggregatorBase class
+
+template<typename AggrValue>
+class Aggregator: public AggregatorBase {
+public:
+    AggrValue m_global; /**< aggregator global value of AggrValue type */
+    AggrValue m_local;  /**< aggregator local value of AggrValue type */
+
+public:
+    virtual void init() = 0;
+    virtual int getSize() const {
+        return sizeof(AggrValue);
+    }
+    virtual void* getGlobal() = 0;
+    virtual void setGlobal(const void* p) = 0;
+    virtual void* getLocal() = 0;
+    virtual void merge(const void* p) = 0;
+    virtual void accumulate(const void* p) = 0;
+}; // definition of Aggregator class
+
+
+--------------------------------------------------------------------------------
+How Master and Workers use AggregatorBase?
+--------------------------------------------------------------------------------
+1. Global value and local value
+
+   An Aggregator should have global states and local states.  We use global
+   value and local value to denote them, respectively.
+
+   The value type is flexible and can be specified as T in the Aggrator<T>.
+   The global value is m_global.  The local value is m_local.
+
+   Master modifies the global value.  Global value is read-only for all the 
+   workers.  A Worker modifies the local value.  Master obtains all the workers'
+   local values and merge them to the global value.
+
+
+2. Preparation:
+
+   Both Master and Workers will call Graph::init().  Please see PageRankVertex.cc
+   for an example.  This method should use regNumAggr(), regAggr() to register
+   Aggregators with the system.
+
+   Master and Workers will use the Aggregator objects from the regAggr() to
+   perform the actual Aggregator computaton.
+
+   Master and Workers will call AggregatorBase::getSize() to get the value size
+   of the Aggregator so that the values can be communicated between Master and
+   Workders.
+
+3. In every superstep
+
+   (1) Master call AggregatorBase::getGlobal() to get the current global value.
+       Then Master sends the global value to all the workers (in the superstep
+       start message).
+
+   (2) When a worker receives the superstep start message, it extracts the global
+       value, and calls AggregatorBase::setGlobal() to set the (read-only) global 
+       value in the local copy of the Aggregator.
+
+   (3) If vertex compute() calls getAggrGlobal(), then the read-only global
+       value is returned.  This value reflects the global value as of the
+       end of the previous superstep.
+
+   (4) If vertex compute() calls accumulateAggr(), then Worker calls 
+       AggregatorBase::accumulate(), which is supposed to accumulate the
+       new value to the local value.
+
+   (5) At the end of a superstep, every Worker sends an superstep end message
+       including the local value of the Aggregator to Master.  Worker calls
+       AggregatorBase::getLocal() to obtain the local value for this purpose.
+
+   (6) When receiving a superstep end message, Master extracts the embedded
+       local value of the Aggregator and calls AggregatorBase::merge() to
+       merge the local value to the global value.
+
+4. AggregatorBase::init()
+
+   Master will call AggregatorBase::init() after 3(1).  Worker will call
+   AggregatorBase::init() after 3(5).
+
+   AggregatorBase::init() often clears the local value.
+
+   AggregatorBase::init() may or may not clear the global value:
+
+  (1) Aggregator is cleared at each superstep:
+      If this behavior is desired, then clear the global value.
+
+  (2) Aggregator is accumulated for the entire computation across all
+      supersteps:
+      If this behavior is desired, then do not clear the global value.
+      The global value can be initiated in the class constructor.
+      
+
+--------------------------------------------------------------------------------
+Aggregator in the PageRank example
+--------------------------------------------------------------------------------
+1. class VERTEX_CLASS_NAME(Aggregator): public Aggregator<double> {
+public:
+    void init() {
+        m_global = 0;
+        m_local = 0;
+    }
+    void* getGlobal() {
+        return &m_global;
+    }
+    void setGlobal(const void* p) {
+        m_global = * (double *)p;
+    }
+    void* getLocal() {
+        return &m_local;
+    }
+    void merge(const void* p) {
+        m_global += * (double *)p;
+    }
+    void accumulate(const void* p) {
+        m_local += * (double *)p;
+    }
+};
+
+The above is the aggregator class in the PageRank example.  It implements
+a sum Aggregator.  The value type is double.  It is easy to understand
+the implementation of getGlobal, setGlobal, getLocal.  accumulate()
+adds a new value as given by p to the local value.  merge() adds
+a local value as given by p to the global value.
+
+Here, we clear the global value in init().  So the sum is cleared in each
+superstep.  Note that PageRank uses this Aggregator to compute the 
+difference between the page ranks of two supersteps.  So it should be
+cleared in each super step.
+
+2. Graph::init()
+
+   // allocate memory for the Aggregator
+aggregator = new VERTEX_CLASS_NAME(Aggregator)[1]; 
+
+   // register the number of aggregators
+regNumAggr(1);
+
+   // register Aggregator ID 0
+regAggr(0, &aggregator[0]); 
+
+
+The above is written so that it is easy to modify the code to support multiple
+aggregators.  However, one can simplify the code as follows:
+
+my_aggregator= new VERTEX_CLASS_NAME(Aggregator)();
+regNumAggr(1);
+regAggr(0, &my_aggregator);
+
+3. Graph::term()
+
+Accordingly, the allocated aggregators should be deleted.
+
+delete[] aggregator;        // don't forget to free memory
+
+4. VERTEX_CLASS_NAME()::compute():
+
+accumulateAggr(0, &acc); // accumulate a value to m_local
+getAggrGlobal(0);        // get the global value as of the end of the last superstep
+
+Note the '0', which is the aggregator ID.

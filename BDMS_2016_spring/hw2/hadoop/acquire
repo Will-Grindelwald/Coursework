@@ -1,0 +1,10 @@
+MapReduce编程
+若要自定义Key或Value的类型
+1. 自定义Key的类型: 
+    1. 必须实现WritableComparable接口, 见: http://hadoop.apache.org/docs/r2.6.0/api/org/apache/hadoop/io/WritableComparable.html, 至少实现readFields, write, compareTo, 建议实现set, get
+    2. 要有空构造函数
+2. 自定义Value的类型: 只须实现WritableComparable接口, 见: http://hadoop.apache.org/docs/r2.6.0/api/org/apache/hadoop/io/Writable.html, 实现readFields, write即可, 建议实现set, get
+实现readFields, write要导包
+import java.io.DataInput;
+import java.io.DataOutput;
+import org.apache.hadoop.io.Writable; / import org.apache.hadoop.io.WritableComparable;

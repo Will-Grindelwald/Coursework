@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+   echo "Usage: ./test <group_number> <test_number>";
+   exit 0;
+fi
+cd ${GRAPHLITE_HOME}
+rm -rf Output WorkerOut
+mkdir Output
+
+case  $1 in
+    "0") #group_0  $ start-graphlite ../0/your_program.so <input path> <output path> <v0 id>
+    start-graphlite ../0/SSSP.so ../part2-input/SSSP-graph$2_4w Output/out $3 ;;
+    "1") #group_1  $ start-graphlite ../1/your_program.so <input path> <output path> <K>
+    start-graphlite ../1/KCore.so ../part2-input/KCore-graph$2_4w Output/out $3 ;;
+    "2") #group_2  $ start-graphlite ../2/your_program.so <input path> <output path> <v0 id> <num color>
+    start-graphlite ../2/GraphColor.so ../part2-input/Color-graph$2_4w Output/out $3 $4 ;;
+    "2.1") #group_2.1
+    start-graphlite ../2.1/Grp_Color.so ../part2-input/Color-graph$2_4w Output/out $3 $4 ;;
+    "3") #group_3  $ start-graphlite ../3/your_program.so <input path> <output path>
+    start-graphlite ../3/DirectedTriangleCount.so ../part2-input/Triangle-graph$2_4w Output/out ;;
+    *) #PageRank_test
+    start-graphlite example/PageRankVertex.so Input/facebookcombined_4w Output/out ;;
+esac
+

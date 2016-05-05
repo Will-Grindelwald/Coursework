@@ -1,0 +1,8 @@
+#!/bin/bash
+rm -f *.class *.jar
+javac $1.java
+jar cfm $1.jar $1-manifest.txt $1*.class
+hdfs dfs -rm -f -r $3
+hadoop jar ./$1.jar $2 $3
+hdfs dfs -cat $3/part-*
+rm -f *.class *.jar
