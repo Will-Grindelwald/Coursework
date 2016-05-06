@@ -4,7 +4,7 @@
 export JAVA_HOME=/usr/local/java/jdk1.8.0_77  *********要改哦
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-export PATH=$PATH:${HOME}/bin:${JAVA_HOME}/bin
+export PATH=${PATH}:${HOME}/bin:${JAVA_HOME}/bin
 
 2. must allow ssh localhost to run without password
    配置hadoop伪分布式的话，需要本机对本机能够进行免密码访问，直接将公钥文件id_rsa.pub的文件追加到authorized_keys中即可
