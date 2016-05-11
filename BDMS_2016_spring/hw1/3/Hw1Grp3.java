@@ -44,13 +44,13 @@ public class Hw1Grp3 {
     private static HTable table;                // HBase table
     
     /**
-	 * The main method of class Hw1Grp3
-	 * @param args should be provided when run the java program in command line
-	 * @throws IOException                  Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
-	 * @throws URISyntaxException           Thrown when the URI writen with mistake(s)
-	 * @throws MasterNotRunningException    Thrown if the master is not running
-	 * @throws ZooKeeperConnectionException Thrown if the client can't connect to zookeeper
-	 */
+     * The main method of class Hw1Grp3
+     * @param args should be provided when run the java program in command line
+     * @throws IOException                  Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
+     * @throws URISyntaxException           Thrown when the URI writen with mistake(s)
+     * @throws MasterNotRunningException    Thrown if the master is not running
+     * @throws ZooKeeperConnectionException Thrown if the client can't connect to zookeeper
+     */
     public static void main(String[] args) throws IOException, URISyntaxException, MasterNotRunningException, ZooKeeperConnectionException {
 
         // 1.parameter operation
@@ -144,9 +144,9 @@ public class Hw1Grp3 {
     }
 
     /**
-	 * This method is used to put result data to the HBase table 
-	 * @param rowKey is the row key of a put
-	 */
+     * This method is used to put result data to the HBase table 
+     * @param rowKey is the row key of a put
+     */
     private static void resultPut (String rowKey) throws IOException {
         int[] op;
         Put put = new Put(rowKey.getBytes());
