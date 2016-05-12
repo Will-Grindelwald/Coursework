@@ -83,4 +83,3 @@
 ├── Aggregator.txt                  // 介绍了 aggregator 的运行机制
 ├── test                            // 我写的自动化测试脚本
 └── test README                     // 作业说明
-
