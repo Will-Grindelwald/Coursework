@@ -18,4 +18,3 @@
 ├── example-input.txt      // 示例的输入
 ├── WordCount.java         // 示例 WordCount
 └── WordCount-manifest.txt
-
