@@ -91,4 +91,3 @@ my @distinct_cmd, @distinct_col, @distinct_res;
      $distinct_res[6]= "distinct_6res.tbl";
      $distinct_res[7]= "distinct_7res.tbl";
      $distinct_res[8]= "distinct_8res.tbl";
-

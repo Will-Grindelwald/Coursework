@@ -203,4 +203,3 @@ extern "C" void destroy_graph(Graph* pobject) {
     delete ( VERTEX_CLASS_NAME(InputFormatter)* )(pobject->m_pin_formatter);
     delete ( VERTEX_CLASS_NAME(Graph)* )pobject;
 }
-

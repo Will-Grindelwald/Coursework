@@ -22,4 +22,3 @@ case  $1 in
     *) #PageRank_test
     start-graphlite example/PageRankVertex.so Input/facebookcombined_4w Output/out ;;
 esac
-

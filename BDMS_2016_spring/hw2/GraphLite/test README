@@ -155,4 +155,3 @@ Note that every undirected edge is shown as TWO directed edge.
 So the vertex compute() method can receive messages from all
 the neighbors in the original undirected graph, and can send
 messages to all the neighbors in the original undirected graph.
-
