@@ -7,7 +7,4 @@
 **第二部分**是使用`GraphLite`做图运算  
 `GraphLite`是陈世敏老师的开源工作, https://github.com/schencoding/GraphLite
 
-需要额外提出的是:
-
-1. `homework_2.pdf`是本次作业的详细说明
-* `content.txt`存放了各文件夹的 tree 及 说明
+PS: `homework_2.pdf`是本次作业的详细说明
