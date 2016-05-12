@@ -13,7 +13,7 @@
 ├── start.sh               // 启动
 ├── stop.sh                // 停止
 ├── test                   // 自动化测试脚本
-├── README.txt
+├── test_README.txt
 ├── hadoop fs shell
 ├── example-input.txt      // 示例的输入
 ├── WordCount.java         // 示例 WordCount
