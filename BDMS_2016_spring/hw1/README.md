@@ -16,7 +16,7 @@
 
 需要额外提出的是:
 
-1. `content.txt`存放了本文件夹的 tree 及 说明
+1. `content`存放了本文件夹的 tree 及 说明
 * `homework_1.pdf`是本次作业的详细说明
 * 一切工作开始前先`./start.sh`，结束后`./stop.sh`
 * 测试工作，详见`hw1-check`文件夹下的`README`
