@@ -1,10 +1,13 @@
 # hw1
+
 本文件夹存放了 Homework_1 的相关内容
 
 需要安装 Hadoop & HBase，详见`安装与配置`
 
-作业的主要内容是:  
-从HDFS读文件, 做中间处理, 输出到HBase  
+作业的主要内容是:
+
+从HDFS读文件, 做中间处理, 输出到HBase
+
 中间处理:
 
 1. Hash join
