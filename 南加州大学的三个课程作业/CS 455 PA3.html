@@ -1,0 +1,659 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!-- saved from url=(0052)http://scf.usc.edu/~csci455/curr/assgts/pa3/pa3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   
+   <meta name="GENERATOR" content="Mozilla/4.5 [en]C-CCK-MCD   (WinNT; I) [Netscape]">
+
+<title>CS 455 PA3</title><style type="text/css">@media print{#STTBimg{ display:none; }#STTBimg2{ display:none; }}</style></head>
+
+
+<body bgcolor="#ffffff"><img id="STTBimg2" src="chrome-extension://chinfkfmaefdlchhempbfgbdagheknoj/arrows/dual/arrow_blue.png" style="transform: rotate(-180deg); opacity: 0.5; position: fixed; width: 50px; height: auto; z-index: 2147483647; border: 0px; padding: 0px; right: 20px; top: 50%; margin: 2px 0px 0px; cursor: pointer;"><img id="STTBimg" src="chrome-extension://chinfkfmaefdlchhempbfgbdagheknoj/arrows/dual/arrow_blue.png" style="opacity: 0.5; position: fixed; width: 50px; height: auto; z-index: 2147483647; border: 0px; padding: 0px; right: 20px; top: 50%; margin: -25px 0px 0px; cursor: pointer;">
+
+<center>
+<h2>
+CS 455 Programming Assignment 3</h2></center>
+
+<div align="right">Fall 2016 [Bono]
+<br>
+<strong>Due:</strong> Wed., Oct. 26, 11:59pm
+</div>
+
+<hr>
+
+<a name="intro"><h3>Introduction</h3></a>
+
+In this program you will get a chance to use recursion to solve a
+problem that could not be done just as easily or more efficiently with
+a loop. It is possible to solve this problem without recursion, but it
+would somewhat more complicated, and would result in the same
+big-O space and time requirements as a recursive solution.
+
+<p>
+
+Backtracking algorithms for solving a problem are ones that attempt to
+complete a search for a solution by constructing partial
+solutions. The algorithm then attempts to extend a partial solution
+toward completion, but if it gets stuck, the algorithm backs up
+(backtracks) by removing the most recently constructed part of the
+solution, and trying another possibility.  Backtracking problems lend
+themselves well to recursion.  In this program you'll use backtracking
+to try to find a path through a maze.  To make it a little easier,
+we're giving you the outline of the algorithm to use in this
+document--if you want an extra challenge, try doing it without looking
+at the pseudo-code in the section on <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/pa3.html#alg">Recursive search
+algorithm</a>.
+</p><p>
+In addition to recursion, some other recent class material that will be used
+in this assignment are the <kbd>LinkedList</kbd> class and file reading.
+</p><p>
+The code for this assignment uses a few new features
+of Java.  They are: 2D arrays and inner classes (we already wrote the inner
+class code for you).  Two-dimensional arrays were covered in section
+7.6 of the textbook.  Inner classes are covered in section 10.5, and
+their use for Listeners (part of the Java GUI system) is covered in
+section 10.7.2.  Event handling in general is covered in Section 10.7,
+but we wrote all the event-handling code for you.
+</p><p>
+
+<a name="files"></a></p><h3><a name="files">The assignment files</a></h3>
+
+
+<strong>Getting the assignment files.</strong> 
+Make a pa3 directory and cd into it.
+The following command will copy the necessary files to your current directory:
+<pre>gmake -f ~csci455/assgts/pa3/Makefile getfiles
+</pre>
+
+<p>
+
+Note: the blurbs below do not describe what each of these
+classes are, and how they fit together.  For
+more details on that, see the section on <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/pa3.html#design">the class design</a>.
+</p><p>
+The files in <strong><tt>bold</tt></strong> below are ones you
+ create and/or modify and submit.  
+The files are:
+
+</p><p>
+
+</p><ul>
+
+<li><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/Maze.java"><strong><kbd>Maze.java</kbd></strong></a> 
+The interface has been specified for you; you need to complete the
+  implementation of this class.
+
+</li><li><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/MazeComponent.java"><strong><kbd>MazeComponent.java</kbd></strong></a>
+  We have written part of this for you, including the interface;
+  you'll need to complete the implementation.
+
+</li><li> <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/MazeViewer.java"><strong><kbd>MazeViewer.java</kbd></strong>
+</a>
+  You'll need to add the file processing code (<kbd>readMazeFile</kbd>
+method) to this program.
+
+</li><li><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/MazeFrame.java"><kbd>MazeFrame.java</kbd></a>  We have
+  written this class for you.  Do not change it.  It creates the other major objects used
+  in this program.
+
+</li><li> <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/MazeCoord.java"><kbd>MazeCoord.java</kbd></a>   We have
+  written this class for you.  Do not change it.
+
+</li><li> <strong><kbd>MazeTester.java</kbd></strong>  A test program to test your Maze
+  class.  You are not required to submit this file.  This is described
+  further in the section on <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/pa3.html#devel">Development Hints</a>.
+
+</li><li><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/testfiles"><kbd>testfiles</kbd></a> A
+directory with some test data for your program.  You will need to test
+  your program
+on more than just these files.
+
+</li><li><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/Makefile"><kbd>Makefile</kbd></a> This has the rules for
+downloading and submitting the files.  These rules are input to the 
+<kbd>gmake</kbd> program. There are directions below on how and when
+you'll need to call gmake.
+
+<a name="certification">
+</a></li><li><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/README"><strong><kbd>README</kbd></strong></a>
+See
+section on <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/pa3.html#submit">Submitting your program</a> for what to
+put in it.  Before you start the assignment please read the following 
+statement which you will be "signing" in the README:
+
+
+<blockquote>
+"I certify that the work submitted for this assignment does not
+violate USC's student conduct code.  In particular, the work is my
+own, not a collaboration, and does not involve code created by other
+people, with the exception of the resources explicitly mentioned in the CS 455
+Course Syllabus.  And I did not share my solution or parts of it with
+other students in the course."
+</blockquote>
+
+
+</li></ul>
+
+<a name="assgt"><h3>The assignment</h3></a>
+
+
+Write a program that takes as input (from a text file) a maze with the following format:
+
+<pre>9 10
+0111111111
+0110000000
+0000111110
+1011101010
+1000001000
+1011011101
+1010001111
+0000100000
+1111111110
+5 8
+8 9
+</pre>
+
+The first line gives the total size of the maze to come; this is a
+maze with 9 rows and 10 columns. On the following lines, a 1 in a
+particular position means that there's a wall at that position. A 0 in
+a particular position means that that position is free. 
+The last two lines of the file are 
+the maze coordinates for the entry location,
+followed by the maze coordinates for the exit location.
+(Note that these maze coordinates are 0-based, just like Java arrays.)
+<p>
+
+Your program will read a maze, such as the one above, from a file
+whose name will be given on the java command line, and initially
+display it to the graphics window as follows (entry location shown in
+yellow and exit location shown in green):
+</p><p>
+<img src="./CS 455 PA3_files/medMazeCropped.png">
+</p><p>
+Then, when the user hits any key, it will display the maze with a
+path through it shown in blue, or just the original maze if there is no
+possible path from the entrance to the exit. It will also give some
+indication of whether there was a path (see the message in the
+upper-left corner of the window below). Here's example output for the
+maze above:
+</p><p>
+<img src="./CS 455 PA3_files/medMazeWithPathCropped.png">
+</p><p>
+
+In general, a given maze may have more than one path through it. Your
+program just has to find one of them.  Note: the above data file is
+available as <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/testfiles/medMaze"><kbd>testfiles/medMaze</kbd></a>.
+</p><p>
+
+Here is an example of input and the corresponding output for a maze
+with no escape (i.e., no way to get from the upper left corner to the
+lower right corner.
+</p><p>
+Maze data (also available as file <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/testfiles/mazeNoPathCycle"><kbd>testfiles/mazeNoPathCycle</kbd></a>):
+
+</p><pre>6 17
+00001000001110001
+11101011001101101
+10001011001100101
+11101011001101101
+11100011001101101
+10001000000001100
+0 0
+5 16
+</pre>
+
+Graphics window after doing the search:
+<p>
+<img src="./CS 455 PA3_files/mazeNoPathCycleCropped.png">
+</p><p>
+
+  Note the different message at the top of the window.
+You can see from this example that one cannot travel between
+diagonally adjacent non-wall positions; only up-down or
+left-right.  
+</p><p>
+We are giving you the overall design to use, as well as some starter
+code, so you should read on before you dive into this problem.
+</p><p>
+</p><h4>What if a <em>wall</em> is the exit location?</h4>
+
+The filled-in squares denoting the exit and entry locations (i.e., the
+green and yellow blocks) are intentionally a little smaller than the
+other blocks.  This is so you can see whether this location was also a
+wall or not (because you'll be able to see the black or white around
+the edges).  It is legal to give such an input file (there are
+examples of these cases in test files <kbd>medWallAtExit</kbd> and
+<kbd>medWallAtEntrance</kbd>).  If the entry or exit location is a
+wall, you won't be able to find a path though that maze.
+<p>
+
+
+<a name="design"></a></p><h3><a name="design">The Class Design</a></h3>
+
+We have done the class design for you.  Normally in a GUI program it's
+desirable to separate the part of the program that does the
+computation and stores data from the part of the program dealing with
+the display and input.  This way it's easier to change the look and
+feel of the program without having to touch the code that does the
+computation (e.g., we could use our <kbd>Maze</kbd> class below, unchanged,
+with a non-graphical console-based interface).  The design given here
+has that separation.
+<p>
+This is an overview of the design, stating which classes are
+responsible for which part of the program, and what the dependencies
+are between the various classes.
+</p><p>
+
+</p><ul>
+  <li> <strong><kbd>MazeViewer</kbd></strong> class.  This class has
+  <kbd>main</kbd>.  It reads in the maze data and sets up the graphics
+  window with the <kbd>MazeFrame</kbd> (passing the maze data to <kbd>MazeFrame</kbd>).
+  It depends on the <kbd>MazeFrame</kbd>.
+<p>
+  </p></li><li> <strong><kbd>MazeFrame</kbd></strong> class.  This <kbd>JFrame</kbd>
+  subclass contains all the display elements and listeners in the
+  program.  The main elements are the <kbd>JLabel</kbd>
+  for displaying the prompt and other messages, the <kbd>MazeComponent</kbd> for
+  displaying the maze and path, and the listener to get keyboard input
+  from the user.  It creates the <kbd>Maze</kbd>,
+  <kbd>MazeKeyListener</kbd> , and <kbd>MazeComponent</kbd> objects.
+  (So it depends on those three other classes.)  We wrote this class for
+  you.
+<p>
+ </p></li><li> <strong><kbd>MazeComponent</kbd></strong> class.  This
+  <kbd>JComponent</kbd> subclass displays the maze and the maze path.
+  (It should look like the maze shown in the screenshots earlier in
+  this document.)
+  It gets all the information about what to display from the <kbd>Maze</kbd>
+  object.  Depends on <kbd>Maze</kbd> and <kbd>MazeCoord</kbd>.
+<p>
+</p></li><li>  <strong><kbd>Maze</kbd></strong> class.  This class has the
+  data about a maze, and knows how to do a maze search.  It doesn't
+  do any I/O.  Depends on <kbd>MazeCoord</kbd>.
+<p>
+ </p></li><li> <strong><kbd>MazeKeyListener</kbd></strong> class.
+   It has the code that responds to a
+  user's keystrokes.  It's created in the <kbd>MazeFrame</kbd>
+  constructor.  It's an inner class of <kbd>MazeFrame</kbd>, so it
+  depends on <kbd>MazeFrame</kbd>.  We wrote this class for you.
+  Listeners are described in a little more detail below.
+<p>
+  </p></li><li> <strong><kbd>MazeCoord</kbd></strong> class.  Tiny immutable
+  class for storing coordinates for a maze location.  (The code is
+  completed for you.)  This way we can store a maze path as a single
+  <kbd>LinkedList</kbd> object, where each element is a
+  <kbd>MazeCoord</kbd>.  In addition to accessors, and
+  <kbd>toString</kbd>, it also supplies an <kbd>equals</kbd> method.
+  Doesn't depend on any other classes.
+
+</li></ul>
+
+<strong>What's a listener?</strong>A listener is a GUI component that
+has a function that gets called whenever a certain user action happens
+(e.g., a mouse click or a key pressed).  It's usually associated with
+a particular component: e.g., the component might be a button, and
+the listener has the code that gets executed when that button is
+pressed).  The application programmer fills in the body of this
+function for a subclass of the appropriate Java listener class.
+  
+<a name="run"><h3>What happens when we run <kbd>MazeViewer</kbd>?</h3></a>
+
+We have written the top-level code for you.  This explains the
+sequence of events that happen when we run the program.
+<p>
+<kbd>main</kbd> will read in the maze data from a file specified on
+the command line.  It also sets up the frame (like we did in pa1).
+Once the frame is set up, the Java GUI system will call
+paintComponent, which should in turn display the maze (with no path at
+this point).
+</p><p>
+The frame also displays a prompt for the user to type a key to
+initiate the maze search.  Once the user types the key, the code
+inside the <kbd>keyPressed</kbd> method in <kbd>MazeKeyListener</kbd> gets called. 
+</p><p>
+
+That code in <kbd>keyPressed</kbd> calls the <kbd>Maze</kbd>
+<kbd>search</kbd> function, and once <kbd>search</kbd> returns, it
+then calls <kbd>repaint</kbd>, which triggers a call to
+<kbd>paintComponent</kbd>, which will display the maze again, this
+time with the path if there was one.  The code also updates the
+message displayed to let the user know whether the search was
+successful.  You should take a look at the <kbd>keyPressed</kbd>
+method, which is near the bottom of <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/MazeFrame.java"><kbd>MazeFrame.java</kbd></a>.
+
+</p><p>
+Again, 
+the top-level control structure has already been written for you.
+The only part of the <kbd>main</kbd>
+class (i.e. <kbd>MazeViewer.java</kbd>) you will have to write is the
+code to read in the file.  We called and wrote the method header for a
+method
+<kbd>readMazeFile</kbd> that you'll have to
+implement to do this.  The rest of the code you'll be writing will be
+the implementations of the <kbd>Maze</kbd> and <kbd>MazeComponent</kbd> classes.
+
+<a name="interface"></a></p><h3><a name="interface">Maze: interface</a></h3>
+
+
+You are required to have the following interface for the
+<kbd>Maze</kbd> class, which will store the internal data for a maze
+and a path through it, and support the following operations (the
+starter file for this is <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/Maze.java"><kbd>Maze.java</kbd></a>).  The parts in square brackets describe
+where how/where that method will be used.
+
+<dl>
+<dt>
+<kbd>Maze(boolean[][] mazeData, MazeCoord startLoc, MazeCoord endLoc)</kbd>
+
+</dt><dd>
+  constructs a maze from the data given parameters.  More details about these parameters
+in the <kbd>Maze</kbd> class comments, and the constructor method comments.
+ [The code to <em>call</em> this
+constructor has already been written for you in the
+<kbd>MazeFrame</kbd> constructor.]
+
+<p>
+</p></dd><dt><kbd>boolean search()</kbd>
+
+</dt><dd>
+searches for a path through the maze from the start position to the
+end position, and saves the path it finds if it finds one. Client can
+access the path found via getPath method.  Also returns whether or not
+it found a path.  [The call to <kbd>search</kbd> has already been
+written for you in the <kbd>MazeListener</kbd>.]
+<p>
+Subsequent calls to <kbd>search</kbd> just return whether a path was
+found.  I.e., the path found the first time will be saved.
+</p><p>
+
+</p></dd><dt> <kbd>LinkedList&lt;MazeCoord&gt; getPath()</kbd>
+
+</dt><dd>
+Returns the path found, or an empty list if we haven't yet called
+<kbd>search()</kbd> or if there is no path through the maze.  [The
+<kbd>MazeComponent</kbd> will use this to get the path to display.]
+<p>
+
+</p></dd><dt> <kbd>boolean hasWallAt(MazeCoord loc)</kbd>
+</dt><dd> Tells us whether there is a wall at this location.
+[The <kbd>MazeComponent</kbd> will use this to get
+  information about where the walls are.]
+<p>
+  
+</p></dd><dt> <kbd>int numRows()
+ </kbd>
+  </dt><dt> <kbd>int numCols()</kbd>
+  </dt><dd> The number of rows and number of columns in the maze, respectively.
+    [The <kbd>MazeComponent</kbd> will use this.]
+<p>
+
+</p></dd><dt> <kbd>MazeCoord getEntryLoc() </kbd>
+</dt><dt> <kbd>MazeCoord getExitLoc() </kbd>
+  </dt><dd> The entry and exit locations of the maze, respectively.
+    [The <kbd>MazeComponent</kbd> will use this.]
+
+
+
+</dd></dl>
+
+Note that a <kbd>MazeCoord</kbd>, is a (row,col) pair.  This is different than
+the coordinate system used in Java windows.  Besides the units being
+different, the row (first number) increase vertically, and the columns
+(second number) increase horizontally.  Put another way, in the display, rows change
+in the y direction and cols change in the x direction.
+<p>
+
+
+<a name="impl"></a></p><h3><a name="impl">Maze: representation/implementation</a></h3>
+
+We're leaving it up to you exactly how to represent your maze inside
+the Maze object.  You will probably use some kind of two-dimensional
+array or arrays.  Some of the design choices are what type of elements
+should be in the array (ints, chars, booleans), whether you want to
+pad it with virtual outer walls (more about that in the next
+paragraph), and whether you want a separate array for storing which
+part of the maze you have already searched (more about that in the
+next section).  You will also have an instance variable for the path,
+which gets created by <kbd>search</kbd> and can be accessed with
+<kbd>getPath</kbd>.
+
+<p>
+
+When visiting different elements in your 2D array to find a path you
+might constantly have to check that you're not trying to access a
+position outside the bounds of the array.  An alternate way to handle
+this issue is to pad the matrix with phantom walls all around it.  In
+this scenario, the matrix you would create would not be the exact size
+given by the user, but be one bigger on all sides, where the "phantom"
+locations are all walls, so you'll never create a path through that
+part.  Note: choosing this implementation tactic should not affect how
+the class operates for the client, since the specification for the
+class will not have changed.  For example, it doesn't change the valid
+MazeCoord values we can give to <kbd>hasWallAt</kbd>, or
+<kbd>numRows()</kbd> and <kbd>numCols()</kbd> for a particular maze.
+and the Maze that is displayed is the input maze,
+not one with extra walls.  You are not required to use this padded
+array idea.
+
+</p><p>
+Whatever representation you choose, don't forget to document it with a
+representation invariant comment.
+</p><p>
+
+<a name="cycles"></a></p><h4><a name="cycles">Detecting cycles</a></h4>
+
+A maze may have a cycle, that is, a way to loop back to a place we've
+already been while searching for a path. We would end up with infinite
+recursion if we don't detect that we have already visited a location
+before.  There are a few ways to handle this situation in our code.
+One way is to use another 2D array <kbd>visited</kbd> that keeps
+track of which positions we've already visited in our search for a
+path, so we don't go around the cycles more than once.  Another way,
+a variation on the first, involves keeping that information in the
+"maze" 2D array itself, by storing a special value at locations we
+have already visited.
+
+<a name="alg"><h4>Recursive Search Algorithm</h4></a>
+
+This kind of problem is called a <em>search</em> problem, even
+though the meaning here is a little different than when we talked
+about finding a particular element in a collection (where we used
+algorithms such as linear or binary search).
+<p>
+You are required to use recursion to solve this problem. The top-level
+method is called <kbd>search()</kbd>.  It will call a
+helper routine (private method) which does the actual
+recursion. Thus the top-level routine can do any initialization or
+cleanup that is necessary (only once). The helper routine will search
+from a particular location. In the pseudo-code below, we assume we
+have a routine which searches from a location given by row, column
+coordinates (r,c).  if <kbd>search(r,c)</kbd> returns true, it means
+there is a free path from position (r,c) to the end position, o.w. it returns
+false.
+</p><p>
+</p><pre>*********** search (r, c): ***********
+
+BASE CASES:
+
+if (r, c) is a wall -- return failure
+if (r, c) has already been visited -- return failure
+    (i.e. that means that we think (r,c) is already on an earlier part
+    of the path; if we visit it again we'll get into an infinite "loop")
+if (r, c) is the final position -- then make (r,c) part of the path and 
+    return success
+
+RECURSIVE CASE(S):
+
+mark (r,c) as visited
+
+for each position, r',c' that is adjacent to r,c:
+    try to find a path from (r',c') to the end (i.e., make a recursive call).
+    if that search was successful
+        make (r,c) part of the path, and return success
+    else try the next neighbor
+
+if we got through the loop without finding a path, that means that
+there is no path from (r,c) -- return failure.
+</pre>
+<br>
+
+Hint: one of the specifications of the Maze class is that the
+beginning of the path linked list (i.e., what's returned by <kbd>getPath()</kbd>)
+is the start of the path found, and the end of the linked list is the end of
+the path.  If you don't write your search code carefully you may end up with the
+reverse path instead.
+
+
+
+<a name="data"><h3>Data Files</h3></a>
+
+You may assume that the data is in the correct format, as shown
+earlier in this document. We will put a few data files in the directory
+
+<pre>~csci455/assgts/pa3/testfiles
+</pre>
+
+Your program will get the name of the maze file from the command line.
+We have provided the code to get that string from the command line
+(the <kbd>args</kbd> argument to <kbd>main</kbd> has command line
+arguments).
+Here are a few examples of how to run the program:
+
+<pre>java MazeViewer smalldata
+java MazeViewer ~csci455/assgts/pa3/testfiles/bigmaze
+</pre>
+
+Note: if you are running your program from Eclipse, you set
+command-line arguments by going to <kbd>Run Configurations</kbd> on
+the <kbd>Run</kbd> menu.  Then go to the tab <kbd>Arguments</kbd> in
+the dialog box.  In the first text box you put the file name.  You can
+change what is the default directory it looks in for that file by
+changing the Working directory to something other than the Default
+(set this near the bottom of the dialog box).
+<p>
+
+The file reading method, <kbd>readMazeFile</kbd> (defined in <a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/MazeViewer.java"><kbd>MazeViewer.java</kbd></a>), can throw an
+<kbd>IOException</kbd>.  Your code will throw
+<kbd>FileNotFoundException</kbd> if you attempt to read a file that doesn't exist.
+(We wrote the handler for this exception for you in <kbd>main</kbd>.)
+This is a subclass of
+<kbd>IOException</kbd>, but we used the more general class in the <kbd>readMazeFile</kbd>
+header so that you wouldn't have to change this interface if you decided to
+use exception handling for other purposes, namely
+to detect malformed files.  However, you are not
+required error-check the file format.
+
+<a name="devel"></a></p><h3><a name="devel">Development Hints</a></h3><a name="devel">
+
+You are welcome to add any debugging print statements to be sent to
+<kbd>System.out</kbd>, and leave them in for your final version.  Make
+sure to preface each such line with the string "DEBUG: ".  The only
+use of System.out in the current program is for error messages.
+<p>
+You are also encouraged to write any private helper methods that will
+make your code clearer.  (That's true for any program for this
+course.)
+</p><p>
+Here is a sequence of tasks for how you might develop your code:
+</p><ol>
+
+<li> Get the constructor and accessors for the Maze class working
+  before you write or test the search function.  You can see
+  that they are working by adding a toString method (the only change
+  to the interface that we will accept), and a MazeTester to use it to
+  create several Maze objects whose data come from hard-coded arrays.
+<p>
+  
+</p></li><li> You could then proceed to implement your MazeComponent class, so
+that you can see that you are displaying your maze correctly.  You can
+test this with the existing MazeViewer program, which will necessitate
+your implementing the file reading part now too, or instead you can test it
+with hard-coded data (described in more detail in the next step).
+
+  <p>
+
+</p></li><li> To test your maze display before writing your file-reading code
+you can create a very small hard-coded maze 2D array that you can pass
+into the Maze constructor (and you could have different such maze
+arrays that you swap in by modifying the code).  To fit in with the
+current structure of the program, to do this you would need to make a
+new version of MazeViewer, because the maze array data comes from
+MazeViewer: MazeViewer passes the maze data into MazeFrame (which in
+turn creates the Maze object from it).  So the new version of MazeViewer would use
+the hard-coded maze data instead of data from a file.
+ <p>
+
+
+</p></li><li> You could next implement the file-reading, to make it easier to
+  test your search method on various mazes later.  Make sure that
+  these mazes you read are display correctly.
+<p>
+</p></li><li> You could then implement the search method.  It's easier to see
+  visually if it's doing the right thing in the context of the
+  graphical program, vs printing out the path as a sequence of locations in a
+  MazeTester program.  Also, because in general there are multiple
+  valid paths, you won't know the exact expected output for a search
+  (i.e., to compare with the actual results in a MazeTester).  For
+  example, you can
+  get different paths depending on the order that you visit the
+  neighbors.  Thus your friend's
+  program might get different results than yours does for a particular
+  maze.  However, you could write MazeTester code that tests that the
+  path is valid, that is, that it doesn't go through walls, it only
+  moves in certain directions, and it starts and ends in the right
+  places.
+<p>
+When debugging your search function use <em>very</em> small mazes.
+
+</p></li><li> You should also use your MazeTester to 
+test creating multiple Maze objects and
+  making multiple calls to the various methods in different orders.
+  Once the constructor is called there is no restriction on the order
+  you can call the other methods.
+ <p>
+
+</p></li><li> For the case of calling search twice on the
+  same maze, you test this by running the existing MazeViewer program, and
+  typing another key on the keyboard after the first search has been
+  completed.  The program should show the same results as when you did
+  the search the first time.
+  <p>
+
+</p></li><li> Similarly, you can test multiple calls to the accessors by
+resizing or iconifying and deiconifying the window, since
+paintComponent should be calling them every time that happens.  (Note:
+unlike pa1, this GUI displays its output fixed-size; it does not
+resize the diagram when the window resizes.)
+
+</li></ol>
+
+</a><a name="submit"><h3>README file / Submitting your program</h3>
+
+You will be submitting completed versions of Maze.java,
+MazeComponent.java, MazeViewer.java, and README.   Make sure your name
+and loginid appear at the start of each file.
+<p>
+</p></a><p><a name="submit">
+Here's a review of what goes in the README:  This is the place to
+document known bugs in your program. That means you should describe
+thoroughly any test cases that fail for the the program you are
+submitting.  You can also use the README to give the grader any other
+special information, such as if there is some special way to compile
+or run your program.  You will also be signing the
+</a><a href="http://scf.usc.edu/~csci455/curr/assgts/pa3/pa3.html#certification">certification</a> 
+shown near the top of this document.
+</p><p>
+
+If you have downloaded all the files using the command shown near the
+beginning of this file, you should have a file called
+<kbd>Makefile</kbd> in your directory.  You can submit your assignment
+with the command:
+
+</p><pre>gmake submit
+</pre>
+
+from an aludra directory containing your solution and the Makefile.
+<p>
+
+</p><hr>
+
+
+<audio controls="controls" style="display: none;"></audio><div id="cli_dialog_div"></div><div id="__nightingale_view_cover" style="width: 100%; height: 100%; transition: -webkit-transform 10s ease-in-out; position: fixed !important; left: 0px !important; bottom: 0px !important; overflow: hidden !important; pointer-events: none !important; z-index: 2147483647; opacity: 0; background: rgb(0, 0, 0) !important;"></div></body><style type="text/css" id="1446923648"></style><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>
